@@ -6,6 +6,7 @@
 
 # Pull base image.
 FROM ubuntu:14.04
+MAINTAINER Nyk Ma <moe@nayuki.info>
 
 # Install.
 RUN \
