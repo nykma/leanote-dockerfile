@@ -5,7 +5,7 @@
 ## Build
 
 ```bash
-git clone && cd leanote-dockerfile
+git clone https://github.com/moenayuki/leanote-dockerfile.git && cd leanote-dockerfile
 docker build --tag="leanote:1.0b2" .
 ```
 
