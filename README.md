@@ -26,7 +26,7 @@ docker run -v <YOUR DATABASE DIR>:/root/notedata -v <YOUR CONF DIR>:/root/leanot
 
 ## Known issue
 
-The container's initial start will fail. you must manually
+The container's initial start may fail. You can manually
 
 ```bash
 docker start leanote
