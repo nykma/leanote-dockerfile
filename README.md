@@ -2,6 +2,8 @@
 
 [LEANOTE](http://leanote.com/) is a notebook platform, which you can host by yourself.
 
+> Leanote, Not Just A Notebook!
+
 ## Build
 
 ```bash

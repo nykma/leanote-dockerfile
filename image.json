@@ -1,0 +1,10 @@
+{
+  "name": "leanote",
+  "version": "1.0b2",
+  "description": "Leanote, Not Just A Notebook!",
+  "author": "Nyk Ma",
+  "logo": "logo.png",
+  "app": {
+    "webPort": 80
+  }
+}
