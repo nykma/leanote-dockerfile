@@ -28,7 +28,7 @@ ENV GOPATH /root/leanote/bin
 WORKDIR /root
 
 # Download leanote and mongodb.
-RUN wget https://github.com/leanote/leanote/releases/download/1.0-beta.2/leanote-linux-x86_64.v1.0-beta.2.bin.tar.gz -O leanote.tar.gz && \
+RUN wget https://github.com/leanote/leanote/releases/download/1.0-beta.3/leanote-linux-x86_64.v1.0-beta.3.bin.tar.gz -O leanote.tar.gz && \
     wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.6.tgz -O mongodb.tgz
 
 # Extract them.

@@ -8,7 +8,7 @@
 
 ```bash
 git clone https://github.com/moenayuki/leanote-dockerfile.git && cd leanote-dockerfile
-docker build --tag="leanote:1.0b2" .
+docker build --tag="leanote:1.0b3" .
 ```
 
 ## Prepare
@@ -23,7 +23,7 @@ Please modify `conf/app.conf` to meet your demands. Focusing on these:
 ## Run
 
 ```bash
-docker run -v <YOUR DATABASE DIR>:/root/notedata -v <YOUR CONF DIR>:/root/leanote/conf -p <YOUR PORT>:80 -d --name leanote leanote:1.0b2
+docker run -v <YOUR DATABASE DIR>:/root/notedata -v <YOUR CONF DIR>:/root/leanote/conf -p <YOUR PORT>:80 -d --name leanote leanote:1.0b3
 ```
 
 ## Known issue
