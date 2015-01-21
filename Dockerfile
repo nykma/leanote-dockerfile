@@ -44,5 +44,5 @@ RUN rm leanote.tar.gz && \
 # Run leanote.
 CMD ["/bin/bash","/root/start.sh"]
 # CMD ["bash"]
-EXPOSE 80
+EXPOSE 9000
 VOLUME ["/root/notedata","/var/log","/root/leanote/conf"]
