@@ -5,11 +5,13 @@
 #
 
 # Pull base image.
-FROM ubuntu:14.04
+#FROM ubuntu:14.04
+FROM docker.cn/docker/ubuntu:latest # use docker.cn
 MAINTAINER Nyk Ma <moe@nayuki.info>
 
 # Install.
 RUN \
+  sed -i 's%/archive.ubuntu.com%/cn.archive.ubuntu.com%g' /etc/apt/sources.list && \ # use cn source
   sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
   apt-get update && \
   apt-get -y upgrade && \
@@ -44,5 +46,5 @@ RUN rm leanote.tar.gz && \
 # Run leanote.
 CMD ["/bin/bash","/root/start.sh"]
 # CMD ["bash"]
-EXPOSE 80
+EXPOSE 9000
 VOLUME ["/root/notedata","/var/log","/root/leanote/conf"]

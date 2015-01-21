@@ -8,5 +8,4 @@ else
   mongod --dbpath /root/notedata --fork --logpath=/var/log/mongodb.log --auth
 fi
 
-chmod a+x /root/leanote/bin/leanote-linux
-/root/leanote/bin/leanote-linux -importPath github.com/leanote/leanote
+cd /root/leanote/bin; bash run.sh
