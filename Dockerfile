@@ -1,52 +1,19 @@
-#
-# Ubuntu Dockerfile
-#
-# https://github.com/dockerfile/ubuntu
-#
+FROM golang:1.11.2-alpine
+MAINTAINER Nyk Ma <i@nyk.ma>
 
-# Pull base image.
-#FROM ubuntu:14.04
-## use docker.cn
-FROM docker.cn/docker/ubuntu:latest
-MAINTAINER Nyk Ma <moe@nayuki.info>
+# golang:alpine :
+# ENV GOPATH /go
+# WORKDIR /go
 
-# Install.
-## use cn source
-RUN \
-  sed -i 's%/archive.ubuntu.com%/cn.archive.ubuntu.com%g' /etc/apt/sources.list && \ 
-  sed -i 's/# \(.*multiverse$\)/\1/g' /etc/apt/sources.list && \
-  apt-get update && \
-  apt-get -y upgrade && \
-  apt-get install -y wget && \
-  rm -rf /var/lib/apt/lists/*
+RUN apk --no-cache add wget ca-certificates && \
+        wget https://github.com/leanote/leanote-all/archive/master.zip && \
+        unzip master.zip && \
+        mv leanote-all-master/src ./ && \
+        rm -r master.zip leanote-all-master /go/src/github.com/leanote/leanote/conf/app.conf && \
+        rm -r /go/src/github.com/leanote/leanote/mongodb_backup && \
+        go install github.com/revel/cmd/revel
 
-# Add files.
-COPY addUser.js /root/addUser.js
-COPY start.sh /root/start.sh
+EXPOSE 8080
 
-# Set environment variables.
-ENV HOME /root
-ENV GOPATH /root/leanote/bin
-
-# Define working directory.
-WORKDIR /root
-
-# Download leanote and mongodb.
-RUN wget https://github.com/leanote/leanote/releases/download/1.0-beta.3/leanote-linux-x86_64.v1.0-beta.3.bin.tar.gz -O leanote.tar.gz && \
-    wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.6.tgz -O mongodb.tgz
-
-# Extract them.
-RUN tar -xvf leanote.tar.gz && \
-    tar -xvf mongodb.tgz
-RUN ["/bin/bash", "-c", "mv /root/mongodb-linux-x86_64-2.6.6/bin/* /usr/local/bin/"]
-
-# Clean
-RUN rm leanote.tar.gz && \
-    rm mongodb.tgz && \
-    rm -rf mongodb*
-
-# Run leanote.
-CMD ["/bin/bash","/root/start.sh"]
-# CMD ["bash"]
-EXPOSE 80
-VOLUME ["/root/notedata","/var/log","/root/leanote/conf"]
+CMD ["revel", "run", "github.com/leanote/leanote"]
+VOLUME ["/go/src/github.com/leanote/leanote/conf/app.conf", "/var/log"]

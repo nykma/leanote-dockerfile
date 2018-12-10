@@ -1,4 +1,4 @@
-## leanote Dockerfile
+## leanote docker-compose configs
 
 [LEANOTE](http://leanote.com/) is a notebook platform, which you can host by yourself.
 
@@ -7,31 +7,25 @@
 ## Build
 
 ```bash
-git clone https://github.com/moenayuki/leanote-dockerfile.git && cd leanote-dockerfile
-docker build --tag="leanote:1.0b3" .
+git clone https://github.com/nykma/leanote-dockerfile.git && cd leanote-dockerfile
+docker-compose build
 ```
 
-## Prepare
+## Preparation
 
-Please modify `conf/app.conf` to meet your demands. Focusing on these:
+### `docker-compose.yml`
+
+Change volumes of mongodb
+
+### `conf/app.conf`
+
+Focusing on these:
 
 - `site.url`
 - `app.secret`
 
-> There's no need to modify the settings of `db` - They're done in `addUser.js` and `start.sh`. Check these two files if you want to do more customization like a boss.
-
 ## Run
 
 ```bash
-docker run -v <YOUR DATABASE DIR>:/root/notedata -v <YOUR CONF DIR>:/root/leanote/conf -p <YOUR PORT>:80 -d --name leanote leanote:1.0b3
+docker-compose up -d
 ```
-
-## Known issue
-
-The container's initial start may fail. You can manually
-
-```bash
-docker start leanote
-```
-
-again to let it work properly. Wondering why. Please fix it if you find out the reason.

@@ -1,11 +1,13 @@
 #!/bin/bash
-# if database isn't initialized:
-if [ ! -f "/root/notedata/leanote.0" ]; then
-  mongod --dbpath /root/notedata --fork --logpath=/var/log/mongodb.log --auth
-  mongorestore -h localhost -d leanote --directoryperdb /root/leanote/mongodb_backup/leanote_install_data/
-  mongo 127.0.0.1:27017/leanote /root/addUser.js
+
+# No migration? No seeding? Seriously?
+if echo "show dbs" | mongo | grep --quiet "leanote"; then
+    echo "Database already initialized"
 else
-  mongod --dbpath /root/notedata --fork --logpath=/var/log/mongodb.log --auth
+    echo "Initialilze database"
+    /usr/local/bin/docker-entrypoint.sh mongod --fork --syslog
+    mongorestore -h localhost -d leanote --dir /leanote_db_bootstrap
+    /usr/local/bin/docker-entrypoint.sh mongod --shutdown
 fi
 
-cd /root/leanote/bin; bash run.sh
+/usr/local/bin/docker-entrypoint.sh mongod
