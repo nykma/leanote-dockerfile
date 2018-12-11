@@ -8,7 +8,7 @@
 
 ```bash
 git clone https://github.com/nykma/leanote-dockerfile.git && cd leanote-dockerfile
-docker-compose build
+docker-compose pull
 ```
 
 ## Preparation
